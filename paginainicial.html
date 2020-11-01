@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8" />
+    <title>Presentació de la web</title>
+    <meta name="author" content="sergio garcia" />
+    <link href="/CSS/disseny.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/JS/video.js"></script>
+</head>
+<body>
+  <img src="/IMATGES/fondo.jpg" id="fondo">
+    <input type="button" class="button" onclick="location.href='programa.html';" value="Ir al ejercicio" />
+    <section id ="reproductor">
+        <video id="element_video" width="720" height="400">
+            <source src="/MEDIA/video.mp4" type="video/mp4">
+        </video>
+        <nav>
+            <div id="botons">
+                <input type="button" id="reproduir" value=">">
+                <input type="button" id="silenciar" value="Silenciar">
+            </div>
+            <div id="barra">
+                <div id="progres"></div>
+            </div>
+            <div id="control">
+                <input type="range" id="volum" min="0" max="1" step="0.1" value="0.6">
+            </div>
+            <div class="clear"></div>
+        </nav>
+    </section>
+</body>
+</html>
