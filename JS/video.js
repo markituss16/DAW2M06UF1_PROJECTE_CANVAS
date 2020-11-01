@@ -1,4 +1,4 @@
-let max, mig, reproduir, barra, progres, silenciar, volum, bucle;
+let max, media, reproduir, barra, progres, silenciar, volum, bucle;
 
 function iniciar(){
     max = 400;
