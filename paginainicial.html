@@ -3,15 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <title>Presentació de la web</title>
-    <meta name="author" content="sergio garcia" />
+    <meta name="author" content=" marc palma sergio garcia" />
     <link href="/CSS/disseny.css" rel="stylesheet" type="text/css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap'); </style>
     <script type="text/javascript" src="/JS/video.js"></script>
 </head>
 <body>
   <img src="/IMATGES/fondo.jpg" id="fondo">
-    <input type="button" class="button" onclick="location.href='programa.html';" value="Ir al ejercicio" />
+    <input type="button" class="button" id="botonejercicio" onclick="location.href='programa.html';" value="Ir al ejercicio" />
     <section id ="reproductor">
-        <video id="media" width="720" height="400">
+        <video id="media" width="720" autoplay height="400">
             <source src="/MEDIA/video.mp4" type="video/mp4">
         </video>
         <nav>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ca">
 	<head>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap'); </style>
 		<meta charset="utf-8" />
 		<title>PR1</title>
-		<meta name="author" content="sergio garcia" />
+		<meta name="author" content=" marc palma sergio garcia" />
 		<link href='http://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
-        <link href="/CSS/disseny.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="/JS/index.js" charset="UTF-8"></script>	        
+        <link href="CSS/disseny.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="JS/index.js" charset="UTF-8"></script>	
+   
 		</style>
     </head>
     
     <body> 
-        <h1>Pagina principal del programa </h1>
-     
-      
+        <h1>  Pagina principal del programa </h1>    
       <div class="dibujo-canvas">
         <canvas id="lienzo1" width="600" height="400"></canvas>
         <script type="text/javascript">
@@ -33,13 +33,13 @@
         
         <!-- Falta definir el valor de estos botones -->
         <input type="button" class="buttonCalc" id="calc" value="Calcular" onclick="calc()" />
-        <input type="button" class="buttonAñ" value="Añadir" id="añadir" onclick="añadir()" />
+
         <input type="button" class="buttonBorr" value="Borrar" id="borrar" onclick="borrar()" />
-    
-        <a id="download" download="canvas.jpg" href="" onclick="download_img(this);">Descargar imagen</a>
+        
+        <a id="descargar" download="canvas.jpg" download="canvas2.jpg" href="" onclick="download_img(this);">Descargar imagen</a>
 
         <input class="rangoSlider" id="rango" type="range" min="0" max="255" value="0">
-     
+       <label> <input type="checkbox" name="cbox1" id="cbox1"onclick="bn()">  <h4>Blanco/negro</h4> </label> <br> 
         <!-- Input en el que el usuari entrara su operacion -->
         <input type="text" id="inputfunc"  placeholder="Introduce tu operación">
             
@@ -48,31 +48,28 @@
      <div id="zoom">Zoom </div>
 
         <!--Selector de tipo  linea-->
-     <form name="gruix" action="programa.html"id="selectorlinia">
+     <form action="programa.html"id="selectorlinia">
         <label for="line">Elige tipo de linea:</label>
         <select name="line" id="line">
-          <optgroup label="Grosor">
-            <select name="gruix_linia" onchange="dibuixarGruix()">
-            <option value="1">linia fina</option>
-            <option value="2">linia gruesa</option>
-            </select>
+          <optgroup label="Grosor" id="gruix">
+            <option value="Fina">linia fina</option>
+            <option value="Gruesa">linia gruesa</option>
+
           </optgroup>
           <optgroup label="color">
             <option value="verde">verde</option>
             <option value="azul">azul</option>
             <option value="negro">negro</option>
           </optgroup>
+
           <optgroup label="continuidad">
-            <select name="tipus_linia" onchange="tipus_linia()">
-            <option value="continua">continua</option>
-            <option value="discontinua">discontinua</option>
-            </select>
-          </optgroup>
+            <option value="continua" id="continuo">continua</option>
+            <option value="discontinua" id="discontinuo">discontinua</option>
         </select>
         <br><br>
         <h1 class="tocalculate"></h1>
         <input type="submit" value="Submit">
-      </form>
+    </form>
    
     <!-- Hacer dos canvas diferentes uno para tablero y otro para valores-->
 </body>
