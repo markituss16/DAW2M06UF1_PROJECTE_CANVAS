@@ -1,7 +1,6 @@
 function calc() {
 
   let calculate = document.getElementById("inputfunc");
-  let gruix = document.getElementById("gruix");
 
   let resultado = calculate.value;
 
@@ -24,11 +23,6 @@ function calc() {
 
   lienzo2.save();
 
-  //lienzo2.clearRect(-200, -200, 1000, 1000);  
-
-  lienzo2.strokeStyle = 'blue'; //Defino el color en hexagesimal
-  this.lienzo2.lineWidth = 0.3;
-
   // this.lienzo2.beginPath(); // Pongo el lápiz
   this.lienzo2.beginPath();
 
@@ -38,21 +32,15 @@ function calc() {
   lienzo2.scale(10, 30);
 
   for (let x = -200; x <= this.ej2.width; x += 0.5) {
+    lienzo2.strokeStyle = 'blue';
+    this.lienzo2.lineWidth = 0.08;
     let y = eval(resultado);
     this.lienzo2.lineTo(x, y);
   }
-
-  this.lienzo2.lineWidth = 0.1;
   this.lienzo2.stroke();
+
   //restaura el ultimo guardado del lienzo
   lienzo2.restore();
-}
-
-function tipus_linia() {
-  lienzo2.setLineDash([4, 14]);
-  lienzo2.beginPath();
-  this.lienzo2.lineTo(x, y);
-  this.lienzo.stroke();
 }
 
 function borrar() {
@@ -60,24 +48,12 @@ function borrar() {
   this.lienzo2.restore();
 }
 
-
-function dibuixarGruix() {
-  //lienzo2.clearRect(-200,-200,1000,1000);
-  lienzo2.lineWidth = document.gruix.linia.selectedIndex;
-  this.lienzo2.beginPath();
-  for (let x = -200; x <= this.ej2.width; x += 0.5) {
-    let y = eval(resultado);
-    this.lienzo2.lineTo(x, y);
-    this.lienzo2.closePath();
-    this.lienzo2.stroke();
-  }
-}
-
+/****************INICI FUNCIÓ EJERCICIO1*********************/
 function ejercicio1() {
 
-  let tamany_cuadricula = 25.1;
+  let tamany_cuadricula = 25;
   let x_eix_distancia_cuadricula_linies = 8;
-  let y_eix_distancia_cuadricula_linies = 12.02;
+  let y_eix_distancia_cuadricula_linies = 12;
   let x_eix_num_inicial = { number: 1, suffix: '' };
   let y_eix_num_inicial = { number: 1, suffix: '' };
 
@@ -157,10 +133,11 @@ function ejercicio1() {
   }
 
   //Per a descarregar la imatge
-  download_img = function (el) {
-    let image = ej2.toDataURL("image/jpg");
-    el.href = image;
-  };
+  /*let button = docuemnt.getElementById('descargar');
+  button.addEventListener('click',function(e){
+    let dataURL = canvas.toDataURL ('image/jpg');
+    button.href = dataURL;
+  });*/
 
   //Faig un translate per a invertir la posició del canvas
   lienzo1.translate(y_eix_distancia_cuadricula_linies * tamany_cuadricula, x_eix_distancia_cuadricula_linies * tamany_cuadricula);
@@ -194,7 +171,59 @@ function ejercicio1() {
     lienzo1.fillText(y_eix_num_inicial.number * i + y_eix_num_inicial.suffix, 8, -tamany_cuadricula * i + 3);
   }
 
-}//FI de la funció ejercicio1
+  /***************IMATGE MANIPULACIÓ BITS ************/
+  let img = new Image();
+  img.crossOrigin = 'anonymous';
+  // img.src = './IMATGES/fondo_canvas.jpg';
+
+  img.onload = function () {
+    lienzo1.drawImage(img, 0, 0);
+  }
+
+  let original = function () {
+    lienzo1.drawImage(img, 0, 0);
+  }
+
+  let invertir = function () {
+    lienzo1.drawImage(img, 0, 0);
+    const imageData = lienzo1.getImageData(0, 0, canvas_amplada, canvas_alçada);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = 255 - data[i]; //vermell
+      data[i + 1] = 255 - data[i + 1]; //verd
+      data[i + 2] = 255 - data[i + 2]; //blau
+    }
+    lienzo1.putImageData(imageData, 0, 0);
+  };
+
+  let escala_grisos = function () {
+    lienzo1.drawImage(img, 0, 0);
+    const imageData = lienzo1.getImageData(0, 0, canvas_amplada, canvas_alçada);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i] = avg; //vermell
+      data[i + 1] = avg; //verd
+      data[i + 2] = avg; //blau
+    }
+    lienzo1.putImageData(imageData, 0, 0);
+  };
+
+  const inputs = document.querySelectorAll('[name=color]');
+  for (const input of inputs) {
+    input.addEventListener("change", function (evt) {
+      switch (evt.target.value) {
+        case "invertit":
+          return invertir();
+        case "escala_grisos":
+          return escala_grisos();
+        default:
+          return original();
+      }
+    });
+  }
+
+}/************FI de la funció ejercicio1*************************/
 
 
 //Blanco y negro
@@ -206,10 +235,65 @@ function bn() {
     lienzo2.stroke();
 
     //alert('checkbox1 esta seleccionado');
+  } else {
+    //alert('checkbox1 no esta seleccionado');
+    lienzo2.strokeStyle = 'blue';
+    lienzo2.stroke();
   }
-  else if (document.getElementById('cbox1').checked = false) {
+}
 
-    lienzo2.restore();
+function seleccionacolor() {
+  var verde = document.getElementById("verde");
+  var azul = document.getElementById("azul");
+  var rojo = document.getElementById("rojo");
+
+  if (verde.checked == true) {
+    lienzo2.strokeStyle = 'green';
+    lienzo2.lineWidth = 2;
+    lienzo2.stroke();
+  }else if (azul.checked == true) {
+    lienzo2.strokeStyle = 'blue';
+    lienzo2.lineWidth = 2;
+    lienzo2.stroke();
+  }else if (rojo.checked == true) {
+    lienzo2.strokeStyle = 'red';
+    lienzo2.lineWidth = 2;
+    lienzo2.stroke();
   }
+}
 
+function seleccionacontinuidad() {
+  var continua = document.getElementById("continua");
+  var discontinua = document.getElementById("discontinua");
+
+  if (continua.checked == true) {
+    lienzo2.clearRect(-200, -200, 1000, 1000);
+    lienzo2.setLineDash([]);
+    lienzo2.stroke();
+  }else if (discontinua.checked == true) {
+    lienzo2.clearRect(-200, -200, 1000, 1000);
+    lienzo2.setLineDash([5, 5]);
+    lienzo2.lineWidth = 2;
+    lienzo2.stroke();
+  }
+}
+
+function seleccionagrosor() {
+  var gruesa = document.getElementById("grueso");
+  var media = document.getElementById("media");
+  var fina = document.getElementById("fina");
+
+  if (gruesa.checked == true) {
+    lienzo2.clearRect(-200, -200, 1000, 1000);
+    lienzo2.lineWidth = 3;
+    lienzo2.stroke();
+  }else if (media.checked == true) {
+    lienzo2.clearRect(-200, -200, 1000, 1000);
+    lienzo2.lineWidth = 2;
+    lienzo2.stroke();
+  }else if (fina.checked == true) {
+    lienzo2.clearRect(-200, -200, 1000, 1000);
+    lienzo2.lineWidth = 1;
+    lienzo2.stroke();
+  }
 }
