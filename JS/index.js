@@ -1,21 +1,26 @@
+window.onload = function grafic_eixos() {
+  let ej1 = document.getElementById('lienzo1');
+
+  document.getElementById("descargar").addEventListener('click',descargar,true);
+
+  ejercicio1(ej1);
+}
+
 function calc() {
 
   let calculate = document.getElementById("inputfunc");
 
   let resultado = calculate.value;
 
-  let resultadoSin = resultado.toLowerCase().includes('sin');
-  let resultadoCos = resultado.toLowerCase().includes('cos');
-  let resultadoTan = resultado.toLowerCase().includes('tan');
-  let resultadoSqrt = resultado.toLowerCase().includes('sqrt');
+  let funcions_trigo = ['sin', 'cos', 'tan', 'sqrt'];
+  
+  for(let i=0; i<funcions_trigo.length; i++){
+    if(resultado.includes(funcions_trigo[i])){
+      resultado = resultado.replace(funcions_trigo[i], 'Math.' + funcions_trigo[i]);
+    }
+  }
 
-
-  if (resultadoSin) resultado = resultado.replace('sin', 'Math.sin'); //resultado en radianes. no grados
-  if (resultadoCos) resultado = resultado.replace('cos', 'Math.cos');
-  if (resultadoTan) resultado = resultado.replace('tan', 'Math.tan');
-  if (resultadoSqrt) resultado = resultado.replace('sqrt', 'Math.sqrt');
-
-
+  
   ej2 = document.getElementById("lienzo2"); //Asigno a una variable el elemento del html que voy a usar
   lienzo2 = ej2.getContext("2d"); //Alisto el canvas para que funcione
   //aplicamos clear rect para limpiar el dibujo y luego hacemos un save para que al ahora de aplicar restore como veremos mas abajo
@@ -26,30 +31,44 @@ function calc() {
   // this.lienzo2.beginPath(); // Pongo el lápiz
   this.lienzo2.beginPath();
 
-  // lienzo2.moveTo(0,300);
-  lienzo2.translate(0, 200);
+  lienzo2.translate(300, 200);
 
   lienzo2.scale(10, 30);
 
   for (let x = -200; x <= this.ej2.width; x += 0.5) {
-    lienzo2.strokeStyle = 'blue';
+    lienzo2.strokeStyle = 'black';
     this.lienzo2.lineWidth = 0.08;
     let y = eval(resultado);
     this.lienzo2.lineTo(x, y);
   }
   this.lienzo2.stroke();
-
+  
   //restaura el ultimo guardado del lienzo
   lienzo2.restore();
 }
 
+//AFEGIR LLEGENDA DINS DEL GRÀFIC
+function afegirLlegenda() {
+  lienzo2.font = "16px Verdana";
+  var gradient = lienzo2.createLinearGradient(0,0,ej2.width,0);
+  gradient.addColorStop("0", "magenta");
+  gradient.addColorStop("0.5", "blue");
+  gradient.addColorStop("1.0", "red");  
+
+  this.lienzo2.strokeStyle = gradient;
+  lienzo2.strokeText("sin(x)",450,60);
+  this.lienzo2.restore();
+}
+
+//FUNCIÓ PER A ESBORRAR
 function borrar() {
   lienzo2.clearRect(-200, -200, 1000, 1000);
   this.lienzo2.restore();
 }
 
+
 /****************INICI FUNCIÓ EJERCICIO1*********************/
-function ejercicio1() {
+function ejercicio1(ej1) {
 
   let tamany_cuadricula = 25;
   let x_eix_distancia_cuadricula_linies = 8;
@@ -57,14 +76,13 @@ function ejercicio1() {
   let x_eix_num_inicial = { number: 1, suffix: '' };
   let y_eix_num_inicial = { number: 1, suffix: '' };
 
-  ej1 = document.getElementById("lienzo1"); //Asigno a una variable el elemento del html que voy a usar
+  this.canvas = ej1; //Asigno a una variable el elemento del html que voy a usar
   lienzo1 = ej1.getContext("2d"); //Alisto el canvas para que funcione
   lienzo1.lineWidth = 1; //Defino el ancho de la linea en pixeles
   lienzo1.strokeStyle = '#000'; //Defino el color en hexagesimal
 
   let canvas_amplada = ej1.width;
   let canvas_alçada = ej1.height;
-
   let num_linies_x = Math.floor(canvas_alçada / tamany_cuadricula);
   let num_linies_y = Math.floor(canvas_amplada / tamany_cuadricula);
 
@@ -132,13 +150,6 @@ function ejercicio1() {
     lienzo1.closePath();
   }
 
-  //Per a descarregar la imatge
-  /*let button = docuemnt.getElementById('descargar');
-  button.addEventListener('click',function(e){
-    let dataURL = canvas.toDataURL ('image/jpg');
-    button.href = dataURL;
-  });*/
-
   //Faig un translate per a invertir la posició del canvas
   lienzo1.translate(y_eix_distancia_cuadricula_linies * tamany_cuadricula, x_eix_distancia_cuadricula_linies * tamany_cuadricula);
 
@@ -170,60 +181,9 @@ function ejercicio1() {
     lienzo1.textAlign = 'end';
     lienzo1.fillText(y_eix_num_inicial.number * i + y_eix_num_inicial.suffix, 8, -tamany_cuadricula * i + 3);
   }
+}
 
-  /***************IMATGE MANIPULACIÓ BITS ************/
-  let img = new Image();
-  img.crossOrigin = 'anonymous';
-  // img.src = './IMATGES/fondo_canvas.jpg';
-
-  img.onload = function () {
-    lienzo1.drawImage(img, 0, 0);
-  }
-
-  let original = function () {
-    lienzo1.drawImage(img, 0, 0);
-  }
-
-  let invertir = function () {
-    lienzo1.drawImage(img, 0, 0);
-    const imageData = lienzo1.getImageData(0, 0, canvas_amplada, canvas_alçada);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] = 255 - data[i]; //vermell
-      data[i + 1] = 255 - data[i + 1]; //verd
-      data[i + 2] = 255 - data[i + 2]; //blau
-    }
-    lienzo1.putImageData(imageData, 0, 0);
-  };
-
-  let escala_grisos = function () {
-    lienzo1.drawImage(img, 0, 0);
-    const imageData = lienzo1.getImageData(0, 0, canvas_amplada, canvas_alçada);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      data[i] = avg; //vermell
-      data[i + 1] = avg; //verd
-      data[i + 2] = avg; //blau
-    }
-    lienzo1.putImageData(imageData, 0, 0);
-  };
-
-  const inputs = document.querySelectorAll('[name=color]');
-  for (const input of inputs) {
-    input.addEventListener("change", function (evt) {
-      switch (evt.target.value) {
-        case "invertit":
-          return invertir();
-        case "escala_grisos":
-          return escala_grisos();
-        default:
-          return original();
-      }
-    });
-  }
-
-}/************FI de la funció ejercicio1*************************/
+/************FI de la funció ejercicio1*************************/
 
 
 //Blanco y negro
@@ -237,7 +197,7 @@ function bn() {
     //alert('checkbox1 esta seleccionado');
   } else {
     //alert('checkbox1 no esta seleccionado');
-    lienzo2.strokeStyle = 'blue';
+    lienzo2.strokeStyle != 'black';
     lienzo2.stroke();
   }
 }
@@ -251,11 +211,11 @@ function seleccionacolor() {
     lienzo2.strokeStyle = 'green';
     lienzo2.lineWidth = 2;
     lienzo2.stroke();
-  }else if (azul.checked == true) {
+  } else if (azul.checked == true) {
     lienzo2.strokeStyle = 'blue';
     lienzo2.lineWidth = 2;
     lienzo2.stroke();
-  }else if (rojo.checked == true) {
+  } else if (rojo.checked == true) {
     lienzo2.strokeStyle = 'red';
     lienzo2.lineWidth = 2;
     lienzo2.stroke();
@@ -270,7 +230,7 @@ function seleccionacontinuidad() {
     lienzo2.clearRect(-200, -200, 1000, 1000);
     lienzo2.setLineDash([]);
     lienzo2.stroke();
-  }else if (discontinua.checked == true) {
+  } else if (discontinua.checked == true) {
     lienzo2.clearRect(-200, -200, 1000, 1000);
     lienzo2.setLineDash([5, 5]);
     lienzo2.lineWidth = 2;
@@ -287,13 +247,84 @@ function seleccionagrosor() {
     lienzo2.clearRect(-200, -200, 1000, 1000);
     lienzo2.lineWidth = 3;
     lienzo2.stroke();
-  }else if (media.checked == true) {
+  } else if (media.checked == true) {
     lienzo2.clearRect(-200, -200, 1000, 1000);
     lienzo2.lineWidth = 2;
     lienzo2.stroke();
-  }else if (fina.checked == true) {
+  } else if (fina.checked == true) {
     lienzo2.clearRect(-200, -200, 1000, 1000);
     lienzo2.lineWidth = 1;
     lienzo2.stroke();
+  }
+}
+//Per a descarregar la imatge
+function extreureImatge() {
+  let ej2 = document.getElementById('descargar');
+
+  ejercicio1(ej1);
+  
+  ej2.toBlob((blob) => {
+    let tmpLink = document.createElement('a');
+    document.body.append(tmplink);
+    tmpLink.download = 'canvas.png';
+    tmpLink.href = URL.createObjectURL(blob);
+    tmpLink.click();
+    tmpLink.remove();
+  });
+}
+
+//IMATGE DE FONS
+function imatge_fons(){
+  var imatge = new Image();
+  imatge.src = "/IMATGES/fondo_canvas.jpg";
+
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+
+  imatge.onload = function() {
+	  ctx.drawImage(imatge, 20,20);
+  };
+
+  var original = function() {
+    ctx.drawImage(img, 0, 0);
+  };
+  
+  var invert = function() {
+    ctx.drawImage(img, 0, 0);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+      data[i]     = 255 - data[i];     // red
+      data[i + 1] = 255 - data[i + 1]; // green
+      data[i + 2] = 255 - data[i + 2]; // blue
+    }
+    ctx.putImageData(imageData, 0, 0);
+  };
+  
+  var grayscale = function() {
+    ctx.drawImage(img, 0, 0);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
+    }
+    ctx.putImageData(imageData, 0, 0);
+  };
+  
+  const inputs = document.querySelectorAll('[name=color]');
+  for (const input of inputs) {
+    input.addEventListener("change", function(evt) {
+      switch (evt.target.value) {
+        case "inverted":
+          return invert();
+        case "grayscale":
+          return grayscale();
+        default:
+          return original();
+      }
+    });
   }
 }

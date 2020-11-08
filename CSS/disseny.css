@@ -19,6 +19,16 @@ button:hover{
     color:white;
 }
     
+aside {
+    width: 20%;
+    padding-left: 15px;
+    margin-left: 30px;
+    top: 20%;
+    float: right;
+    background-color: lightgray;
+    position: absolute;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 /****************VIDEO*****************/
 #reproductor{
@@ -77,12 +87,36 @@ nav{margin:5px 0px;}
     background-color:lightgray;
     color:black;
     position:absolute;
-    top:85%;
+    top:88%;
     left:45%;
     font-size: 25px;
     border-radius: 30px;
     width: 10%;
     height: 10%;
+}
+
+.buttonLleg{
+    background-color:lightgray;
+    color:black;
+    position:absolute;
+    font-size: large;
+    font-family: 'Dancing Script', cursive;
+    border-radius: 30px;
+    height: 5%;
+    top:60%;
+    left:71%;
+}
+
+.button_manip{
+    background-color:lightgray;
+    color:black;
+    position:absolute;
+    font-size: large;
+    font-family: 'Dancing Script', cursive;
+    border-radius: 30px;
+    height: 5%;
+    top:85%;
+    left:15%;
 }
 
 .button:hover{
@@ -177,11 +211,12 @@ nav{margin:5px 0px;}
 }
 
 .dibujo-canvas{
-    position:absolute;
+    position: absolute;
     margin-left: 30%;
     margin-top:6%;
     width: 600px;
     height: 400px;
+    background: transparent;
 }
 
 .dibujo-canvas2{
@@ -192,20 +227,18 @@ nav{margin:5px 0px;}
     height: 400px;
 }
 
+.dibujo-canvas3{
+    position:absolute; 
+    top: 1000px;
+    margin-left: 30%;
+    margin-top:6%;
+}
+
 .rangoSlider{
     font-family: 'Dancing Script', cursive;
     position: absolute;
     top:30%;
     left:10%;
-}
-
-div#zoom{
-    font-size:20px;
-    font-weight: bold;
-    position:absolute;
-    top:26%;
-    left:15%;
-    font-family: 'Dancing Script', cursive;
 }
 
 img#fondo{
@@ -227,7 +260,7 @@ img#fondo{
     position:absolute;
     font-family: 'Dancing Script', cursive;
     font-size: 20px;
-    top:40%;
+    top:30%;
     left:2%;
 }
 
@@ -235,7 +268,7 @@ img#fondo{
     position:absolute;
     font-family: 'Dancing Script', cursive;
     font-size: 20px;
-    top:60%;
+    top:50%;
     left:2%;
 }
 
@@ -243,7 +276,7 @@ img#fondo{
     position:absolute;
     font-family: 'Dancing Script', cursive;
     font-size: 20px;
-    top:80%;
+    top:70%;
     left:2%;
 }
 
