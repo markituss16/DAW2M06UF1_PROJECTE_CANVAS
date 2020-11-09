@@ -107,16 +107,9 @@ nav{margin:5px 0px;}
     left:71%;
 }
 
-.button_manip{
-    background-color:lightgray;
-    color:black;
-    position:absolute;
-    font-size: large;
-    font-family: 'Dancing Script', cursive;
-    border-radius: 30px;
-    height: 5%;
-    top:85%;
-    left:15%;
+.menu_manip{
+    padding-left: 25px;
+    padding-top: 700px;
 }
 
 .button:hover{
@@ -124,7 +117,7 @@ nav{margin:5px 0px;}
     color:white;
 }
 
-#descargar{
+#btnDescarregar{
 
     background-color:lightgray;
     text-align: center;
@@ -229,9 +222,10 @@ nav{margin:5px 0px;}
 
 .dibujo-canvas3{
     position:absolute; 
-    top: 1000px;
-    margin-left: 30%;
-    margin-top:6%;
+    top: 700px;
+    margin-left: 35%;
+    margin-top:4%;
+    padding-bottom: 5%;
 }
 
 .rangoSlider{

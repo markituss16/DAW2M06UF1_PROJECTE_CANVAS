@@ -14,72 +14,75 @@
 </head>
 
 <body>
-  <h1> Pagina principal del programa </h1>
-  <div class="dibujo-canvas">
-    <canvas id="lienzo1" width="600" height="400"></canvas>
-  </div>
-  <div class="dibujo-canvas2">
-    <canvas id="lienzo2" width="600" height="400" z-index=0></canvas>
-  </div>
-  <div class="dibujo-canvas3">
-    <canvas id="lienzo3" width="400" height="200"></canvas>
-  </div>
+  <header>
+    <h1> Pagina principal del programa </h1>
+  </header>
 
-  <!--CHECKBOX PER A MANIPULACIÓ DE BITS-->
-  <div id="menu_manip">
-    <input type="button" class="button_manip" value="Imatge">
-    <form>
-      <input type="radio" id="original" name="color" value="original" checked>
-      <label for="original">Original</label>
+  <section>
+    <div class="dibujo-canvas">
+      <canvas id="lienzo1" width="600" height="400"></canvas>
+    </div>
+    <div class="dibujo-canvas2">
+      <canvas id="lienzo2" width="600" height="400" z-index=0></canvas>
+    </div>
+    <div class="dibujo-canvas3">
+      <canvas id="lienzo3" width="600" height="400"></canvas>
+    </div>
 
-      <input type="radio" id="grayscale" name="color" value="grayscale">
-      <label for="grayscale">Grayscale</label>
+    <!--CHECKBOX PER A MANIPULACIÓ DE BITS-->
+    <div class="menu_manip">
+      <form>
+        <input type="radio" id="original" name="color" value="original" checked>
+        <label for="original">Original</label>
 
-      <input type="radio" id="inverted" name="color" value="inverted">
-      <label for="inverted">Inverted</label>
-    </form>
-  </div>
+        <input type="radio" id="grayscale" name="color" value="grayscale">
+        <label for="grayscale">Grayscale</label>
 
-  <!-- Boton para volver a pagina principal -->
-  <div id="botons_func">
-    <input type="button" class="button" onclick="location.href='paginainicial.html';" value="Volver al video" />
-    <input type="button" class="buttonLleg" value="Llegenda" onclick="afegirLlegenda()">
-    <input type="button" class="buttonBorr" value="Borrar" id="borrar" onclick="borrar()" />
-    <!--DESCARREGAR IMATGE-->
-    <button id="descargar" onclick="extreureImatge()">Descarrega la imatge</button>
-  </div>
+        <input type="radio" id="inverted" name="color" value="inverted">
+        <label for="inverted">Inverted</label>
+      </form>
+    </div>
 
-  <div id="inputs_op">
-    <label> <input type="checkbox" name="cbox1" id="cbox1" onclick="bn()">
-      <h4>Blanco/negro</h4>
-    </label> <br>
+    <!-- Boton para volver a pagina principal -->
+    <div id="botons_func">
+      <input type="button" class="button" onclick="location.href='paginainicial.html';" value="Volver al video" />
+      <input type="button" class="buttonLleg" value="Llegenda" onclick="afegirLlegenda()">
+      <input type="button" class="buttonBorr" value="Borrar" id="borrar" onclick="borrar()" />
+      <!--DESCARREGAR IMATGE-->
+      <button id="btnDescarregar" onclick="extreureImatge()">Descarrega la imatge</button>
+    </div>
 
-    <!-- Input en el que el usuari entrara su operacion -->
-    <input type="text" id="inputfunc" placeholder="Introduce tu operación">
-    <input type="button" class="buttonCalc" id="calc" value="Calcular" onclick="calc()" />
-  </div>
+    <div id="inputs_op">
+      <label> <input type="checkbox" name="cbox1" id="cbox1" onclick="bn()">
+        <h4>Blanco/negro</h4>
+      </label> <br>
 
-  <!--Selector de tipo  linea-->
-  <div id="selectcolor">
-    <input id="verde" name="color" type="radio" value="verde"> Verde </input>
-    <input id="azul" name="color" type="radio" value="azul">Azul </input>
-    <input id="rojo" name="color" type="radio" value="rojo">Rojo </input>
-    <button onclick="seleccionacolor()" id="btn1">Selecciona el color</button>
-  </div>
+      <!-- Input en el que el usuari entrara su operacion -->
+      <input type="text" id="inputfunc" placeholder="Introduce tu operación">
+      <input type="button" class="buttonCalc" id="calc" value="Calcular" onclick="calc()" />
+    </div>
 
-  <div id="selectcontinuidad">
-    <input id="continua" name="cont" type="radio" value="continua"> Continua </input>
-    <input id="discontinua" name="cont" type="radio" value="discontinua">Discontinua </input>
-    <button onclick="seleccionacontinuidad()" id="btn1">Selecciona la continuidad</button>
-  </div>
+    <!--Selector de tipo  linea-->
+    <div id="selectcolor">
+      <input id="verde" name="color" type="radio" value="verde"> Verde </input>
+      <input id="azul" name="color" type="radio" value="azul">Azul </input>
+      <input id="rojo" name="color" type="radio" value="rojo">Rojo </input>
+      <button onclick="seleccionacolor()" id="btn1">Selecciona el color</button>
+    </div>
 
-  <div id="selectgrosor">
-    <input id="grueso" name="gros" type="radio" value="grueso"> Gruesa </input>
-    <input id="media" name="gros" type="radio" value="media">Grosor medio </input>
-    <input id="fina" name="gros" type="radio" value="fina">Fina </input>
-    <button onclick="seleccionagrosor()" id="btn1">Selecciona el grosor</button>
-  </div>
+    <div id="selectcontinuidad">
+      <input id="continua" name="cont" type="radio" value="continua"> Continua </input>
+      <input id="discontinua" name="cont" type="radio" value="discontinua">Discontinua </input>
+      <button onclick="seleccionacontinuidad()" id="btn1">Selecciona la continuidad</button>
+    </div>
+
+    <div id="selectgrosor">
+      <input id="grueso" name="gros" type="radio" value="grueso"> Gruesa </input>
+      <input id="media" name="gros" type="radio" value="media">Grosor medio </input>
+      <input id="fina" name="gros" type="radio" value="fina">Fina </input>
+      <button onclick="seleccionagrosor()" id="btn1">Selecciona el grosor</button>
+    </div>
+  </section>
 
 </body>
-
 </html>

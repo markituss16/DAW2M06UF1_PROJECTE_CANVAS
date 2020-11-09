@@ -1,10 +1,10 @@
-window.onload = function grafic_eixos() {
+window.onload = function imatge_manip(){
+  let ej3 = document.getElementById('lienzo3');
   let ej1 = document.getElementById('lienzo1');
-
-  document.getElementById("descargar").addEventListener('click',descargar,true);
-
   ejercicio1(ej1);
+  imatge_fons(ej3);
 }
+
 
 function calc() {
 
@@ -56,7 +56,7 @@ function afegirLlegenda() {
   gradient.addColorStop("1.0", "red");  
 
   this.lienzo2.strokeStyle = gradient;
-  lienzo2.strokeText("sin(x)",450,60);
+  lienzo2.strokeText(document.getElementById("inputfunc").value,450,60);
   this.lienzo2.restore();
 }
 
@@ -158,7 +158,7 @@ function ejercicio1(ej1) {
     lienzo1.beginPath();
     lienzo1.font = '10px Arial';
     lienzo1.textAlign = 'start';
-    lienzo1.fillText(x_eix_num_inicial.number * i + x_eix_num_inicial.suffix, tamany_cuadricula * i - 2, 15);
+    lienzo1.fillText(x_eix_num_inicial.number * i + x_eix_num_inicial.suffix, tamany_cuadricula * i - 3, 15);
   }
 
   for (i = 1; i < y_eix_distancia_cuadricula_linies; i++) {
@@ -179,7 +179,7 @@ function ejercicio1(ej1) {
     lienzo1.beginPath();
     lienzo1.font = '10px Arial';
     lienzo1.textAlign = 'end';
-    lienzo1.fillText(y_eix_num_inicial.number * i + y_eix_num_inicial.suffix, 8, -tamany_cuadricula * i + 3);
+    lienzo1.fillText(y_eix_num_inicial.number * i + y_eix_num_inicial.suffix, 14, -tamany_cuadricula * i + 3);
   }
 }
 
@@ -259,51 +259,44 @@ function seleccionagrosor() {
 }
 //Per a descarregar la imatge
 function extreureImatge() {
-  let ej2 = document.getElementById('descargar');
-
-  ejercicio1(ej1);
-  
-  ej2.toBlob((blob) => {
-    let tmpLink = document.createElement('a');
-    document.body.append(tmplink);
-    tmpLink.download = 'canvas.png';
-    tmpLink.href = URL.createObjectURL(blob);
-    tmpLink.click();
-    tmpLink.remove();
-  });
+  let btnDescarregar = document.getElementById("btnDescarregar");
+  btnDescarregar.addEventListener('click',function(e){
+  let dataURL = lienzo1.canvas.toDataURL('image/jpg');
+  btnDescarregar.href = dataURL;
+  })
 }
 
 //IMATGE DE FONS
-function imatge_fons(){
+function imatge_fons(ej3){
   var imatge = new Image();
   imatge.src = "/IMATGES/fondo_canvas.jpg";
 
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
+  this.canvas = ej3; 
+  lienzo3 = ej3.getContext("2d");
 
   imatge.onload = function() {
-	  ctx.drawImage(imatge, 20,20);
+	  lienzo3.drawImage(imatge, 0,0);
   };
 
   var original = function() {
-    ctx.drawImage(img, 0, 0);
+    lienzo3.drawImage(imatge, 0, 0);
   };
   
   var invert = function() {
-    ctx.drawImage(img, 0, 0);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    lienzo3.drawImage(imatge, 0, 0);
+    const imageData = lienzo3.getImageData(0, 0, ej3.width, ej3.height);
     const data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
       data[i]     = 255 - data[i];     // red
       data[i + 1] = 255 - data[i + 1]; // green
       data[i + 2] = 255 - data[i + 2]; // blue
     }
-    ctx.putImageData(imageData, 0, 0);
+    lienzo3.putImageData(imageData, 0, 0);
   };
   
   var grayscale = function() {
-    ctx.drawImage(img, 0, 0);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    lienzo3.drawImage(imatge, 0, 0);
+    const imageData = lienzo3.getImageData(0, 0, ej3.width, ej3.height);
     const data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
@@ -311,7 +304,7 @@ function imatge_fons(){
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
     }
-    ctx.putImageData(imageData, 0, 0);
+    lienzo3.putImageData(imageData, 0, 0);
   };
   
   const inputs = document.querySelectorAll('[name=color]');
