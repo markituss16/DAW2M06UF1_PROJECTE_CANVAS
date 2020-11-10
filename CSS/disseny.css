@@ -1,14 +1,16 @@
+/*TITOL AMBDÓS DOCUMENTS*/
 h1{
     font-family: 'Dancing Script', cursive;
     text-align: center;
 }
 
+/*Subtitol pàgina inicial*/
 h3{
     font-family: 'Dancing Script', cursive;
-   text-align: center; 
-    
+   text-align: center;   
 }
 
+/*Botó anar vídeo*/
 button{
     font-size: 20px;
     font-family: 'Dancing Script', cursive;
@@ -18,7 +20,17 @@ button:hover{
     background-color:black;
     color:white;
 }
+
+/*Imatge fons*/
+img#fondo{
+    position:fixed;
+    left:0%;
+    top:0%;
+    width: 100%;
+    height: 100%;
+}
     
+/*Columna descriptiva funcions disponibles*/
 aside {
     width: 20%;
     padding-left: 15px;
@@ -80,8 +92,49 @@ nav{margin:5px 0px;}
 .clear{
     clear: both;
 }
-/*****************************************/
+/********************PÀGINA FUNCIONS*********************/
+/*Per a tots els canvas*/
+.dibujo-canvas{
+    position: absolute;
+    margin-left: 30%;
+    margin-top:6%;
+    width: 600px;
+    height: 400px;
+    background: transparent;
+}
 
+.dibujo-canvas2{
+    position:absolute; 
+    margin-left: 30%;
+    margin-top:6%;
+    width: 600px;
+    height: 400px;
+}
+
+.dibujo-canvas3{
+    z-index: -1;
+    position:absolute; 
+    top: 112px;
+    margin-left: 30%;
+    margin-top:4%;
+    padding-bottom: 5%;
+}
+
+/*inserir funcio a realitzar*/
+#inputfunc{   
+    background-color:lightgray;
+    color:black;
+    position: absolute;
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    top:15%;
+    left:30%;
+    border-radius: 30px;
+    width: 40%;
+    height: 4%;
+}
+
+/*Per a tots els botons amb classe button*/
 .button{
     font-family: 'Dancing Script', cursive;
     background-color:lightgray;
@@ -95,6 +148,12 @@ nav{margin:5px 0px;}
     height: 10%;
 }
 
+.button:hover{
+    background-color:black;
+    color:white;
+}
+
+/*Botó de la llegenda*/
 .buttonLleg{
     background-color:lightgray;
     color:black;
@@ -107,17 +166,16 @@ nav{margin:5px 0px;}
     left:71%;
 }
 
+/*Per a la manipulació de bits*/
 .menu_manip{
-    padding-left: 25px;
-    padding-top: 700px;
+    position:absolute;
+  
+    padding-top: 120px;
+    left:1105px;
 }
 
-.button:hover{
-    background-color:black;
-    color:white;
-}
-
-#btnDescarregar{
+/*Botó de descàrrega*/
+#descargar{
 
     background-color:lightgray;
     text-align: center;
@@ -137,19 +195,7 @@ nav{margin:5px 0px;}
     color:white;
 }
 
-#inputfunc{   
-    background-color:lightgray;
-    color:black;
-    position: absolute;
-    font-family: 'Dancing Script', cursive;
-    font-size: 20px;
-    top:15%;
-    left:30%;
-    border-radius: 30px;
-    width: 40%;
-    height: 4%;
-
-}
+/*Botó calcular*/
 
 .buttonCalc{
 
@@ -169,6 +215,7 @@ nav{margin:5px 0px;}
     color:white;
 }
 
+/*Botó esborrar*/
 .buttonBorr{
 
     background-color:lightgray;
@@ -186,63 +233,7 @@ nav{margin:5px 0px;}
     color:white;
 }
 
-.buttonImg{
-    background-color:lightgray;
-    color:black;
-    position:absolute;
-    top:85%;
-    left:63%;
-    font-size: large;
-    font-family: 'Dancing Script', cursive;
-    border-radius: 30px;
-    height: 5%;
-}
-
-.buttonImg:hover{
-    background-color:black;
-    color:white;
-}
-
-.dibujo-canvas{
-    position: absolute;
-    margin-left: 30%;
-    margin-top:6%;
-    width: 600px;
-    height: 400px;
-    background: transparent;
-}
-
-.dibujo-canvas2{
-    position:absolute; 
-    margin-left: 30%;
-    margin-top:6%;
-    width: 600px;
-    height: 400px;
-}
-
-.dibujo-canvas3{
-    position:absolute; 
-    top: 700px;
-    margin-left: 35%;
-    margin-top:4%;
-    padding-bottom: 5%;
-}
-
-.rangoSlider{
-    font-family: 'Dancing Script', cursive;
-    position: absolute;
-    top:30%;
-    left:10%;
-}
-
-img#fondo{
-    position:fixed;
-    left:0%;
-    top:0%;
-    width: 100%;
-    height: 100%;
-}
-
+/*Opció blanc/negre*/
 #cbox1{
     font-family: 'Dancing Script', cursive;
     position: absolute;
@@ -250,6 +241,7 @@ img#fondo{
     left:73%;
 }
 
+/*Per als tipus de selectors de color, gruix,etc*/
 #selectcolor{
     position:absolute;
     font-family: 'Dancing Script', cursive;
@@ -274,6 +266,7 @@ img#fondo{
     left:2%;
 }
 
+/*titols que hi ha al document*/
 h4{
     font-size:20px;
     position: absolute;

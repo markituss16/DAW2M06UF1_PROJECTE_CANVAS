@@ -36,10 +36,10 @@
         <label for="original">Original</label>
 
         <input type="radio" id="grayscale" name="color" value="grayscale">
-        <label for="grayscale">Grayscale</label>
+        <label for="grayscale">Escala de grisos</label>
 
         <input type="radio" id="inverted" name="color" value="inverted">
-        <label for="inverted">Inverted</label>
+        <label for="inverted">Invertir</label>
       </form>
     </div>
 
@@ -48,15 +48,15 @@
       <input type="button" class="button" onclick="location.href='paginainicial.html';" value="Volver al video" />
       <input type="button" class="buttonLleg" value="Llegenda" onclick="afegirLlegenda()">
       <input type="button" class="buttonBorr" value="Borrar" id="borrar" onclick="borrar()" />
+      
       <!--DESCARREGAR IMATGE-->
-      <button id="btnDescarregar" onclick="extreureImatge()">Descarrega la imatge</button>
+      <a id="descargar" download="canvas.jpg" download="canvas2.jpg" href="" onclick="download_img(this);">Descargar imagen</a>
     </div>
 
     <div id="inputs_op">
       <label> <input type="checkbox" name="cbox1" id="cbox1" onclick="bn()">
         <h4>Blanco/negro</h4>
       </label> <br>
-
       <!-- Input en el que el usuari entrara su operacion -->
       <input type="text" id="inputfunc" placeholder="Introduce tu operación">
       <input type="button" class="buttonCalc" id="calc" value="Calcular" onclick="calc()" />

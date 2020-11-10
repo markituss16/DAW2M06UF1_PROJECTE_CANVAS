@@ -11,28 +11,24 @@ function calc() {
   let calculate = document.getElementById("inputfunc");
 
   let resultado = calculate.value;
-
-  let funcions_trigo = ['sin', 'cos', 'tan', 'sqrt'];
+//cbrt raiz cubica de un número logaritmo base 10, logaritmo base 2 
+  let funcions_trigo = ['sin', 'cos', 'tan', 'sqrt', 'log10','cbrt','log2'];
   
   for(let i=0; i<funcions_trigo.length; i++){
-    if(resultado.includes(funcions_trigo[i])){
-      resultado = resultado.replace(funcions_trigo[i], 'Math.' + funcions_trigo[i]);
+    if(resultado.includes(funcions_trigo[i])){     
+      resultado = resultado.replace(funcions_trigo[i], 'Math.' + funcions_trigo[i]);    
     }
   }
 
-  
   ej2 = document.getElementById("lienzo2"); //Asigno a una variable el elemento del html que voy a usar
   lienzo2 = ej2.getContext("2d"); //Alisto el canvas para que funcione
   //aplicamos clear rect para limpiar el dibujo y luego hacemos un save para que al ahora de aplicar restore como veremos mas abajo
   //se limpie el canvas y se calcule el nuevo valor. 
-
   lienzo2.save();
 
   // this.lienzo2.beginPath(); // Pongo el lápiz
   this.lienzo2.beginPath();
-
   lienzo2.translate(300, 200);
-
   lienzo2.scale(10, 30);
 
   for (let x = -200; x <= this.ej2.width; x += 0.5) {
@@ -185,7 +181,6 @@ function ejercicio1(ej1) {
 
 /************FI de la funció ejercicio1*************************/
 
-
 //Blanco y negro
 function bn() {
   if (document.getElementById('cbox1').checked) {
@@ -193,10 +188,7 @@ function bn() {
     lienzo2.strokeStyle = 'black';
     lienzo2.lineWidth = 2.5;
     lienzo2.stroke();
-
-    //alert('checkbox1 esta seleccionado');
   } else {
-    //alert('checkbox1 no esta seleccionado');
     lienzo2.strokeStyle != 'black';
     lienzo2.stroke();
   }
@@ -257,14 +249,14 @@ function seleccionagrosor() {
     lienzo2.stroke();
   }
 }
+
 //Per a descarregar la imatge
-function extreureImatge() {
-  let btnDescarregar = document.getElementById("btnDescarregar");
-  btnDescarregar.addEventListener('click',function(e){
-  let dataURL = lienzo1.canvas.toDataURL('image/jpg');
-  btnDescarregar.href = dataURL;
-  })
-}
+  download_img = function(download) {
+    let image = ej2.toDataURL("image/jpg");   
+    download.href = image;    
+  };  
+  
+
 
 //IMATGE DE FONS
 function imatge_fons(ej3){
